@@ -1,6 +1,6 @@
 {
-  "name": "@dcodegroup/kanopi-sidebar-legacy",
-  "version": "1.0.2",
+  "name": "@dcodegroup-au/kanopi-sidebar-legacy",
+  "version": "1.0.3",
   "private": false,
   "description": "Kanopi Sidebar Widget",
   "author": "Dcode Group",
