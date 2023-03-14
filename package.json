@@ -1,5 +1,5 @@
 {
-  "name": "kanopisidebar",
+  "name": "@dcodegroup/kanopi-sidebar-legacy",
   "version": "1.0.1",
   "description": "Kanopi Sidebar Widget",
   "main": "src/index.js",
