@@ -8,13 +8,12 @@ mix.js('/src/index.js', '/build/')
      module: {
        rules: [
          {
-           test: /\.vue$/,
-           loader: 'vue-loader'
+           test: /\.js$/,
+           use: {
+             loader: 'babel-loader'
+           }
          }
        ]
-     },
-     plugins: [
-       new VueLoaderPlugin()
-     ]
+     }
    })
    .version();

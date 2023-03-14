@@ -6,7 +6,7 @@
         type="button"
         @click="handleClick"
       >
-        <kanopi-logo />
+        <kanopi-logo/>
       </button>
       <issueModal
         v-if="modalOpen"
