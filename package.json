@@ -1,5 +1,8 @@
 {
-  "private": true,
+  "name": "kanopisidebar",
+  "version": "1.0.1",
+  "description": "Kanopi Sidebar Widget",
+  "main": "src/index.js",
   "scripts": {
     "prod": "mix --production"
   },
