@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "private": false,
   "description": "Kanopi Sidebar Widget",
-  "main": "src/index.js",
+  "author": "Dcode Group",
+  "main": "build/index.js",
   "scripts": {
     "prod": "mix --production"
   },
