@@ -480,6 +480,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../sass/kanopi-sidebar.scss";
-// ToDo: Drop zone styles are not being applied
+@import "../sass/kanopi-sidebar.scss";
 </style>

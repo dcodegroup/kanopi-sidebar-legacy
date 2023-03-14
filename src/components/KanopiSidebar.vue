@@ -133,5 +133,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../sass/kanopi-sidebar.scss";
+@import "../sass/kanopi-sidebar.scss";
 </style>

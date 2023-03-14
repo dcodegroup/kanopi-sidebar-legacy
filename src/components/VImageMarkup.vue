@@ -211,6 +211,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../sass/kanopi-sidebar.scss";
-// ToDo: Check styles are being applied
+@import "../sass/kanopi-sidebar.scss";
 </style>
