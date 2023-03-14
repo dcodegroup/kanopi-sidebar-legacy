@@ -180,13 +180,13 @@ import bugIcon from "./svgs/BugIcon.vue";
 import childIcon from "./svgs/ChildIcon.vue";
 import lightBulbIcon from "./svgs/LightBulbIcon.vue";
 import chevronCircleLeft from "./svgs/ChevronCircleLeft.vue";
-// import vueDropzone from "vue2-dropzone";  https://github.com/rowanwins/vue-dropzone not ready on vue 3
+import vueDropzone from "vue2-dropzone";
 import axios from "axios";
 
 export default {
   name: "IssueModal",
   components: {
-    // vueDropzone,
+    vueDropzone,
     paperclip,
     camera,
     edit,
