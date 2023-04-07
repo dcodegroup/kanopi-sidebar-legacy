@@ -1,5 +1,5 @@
 <template>
-  <aside id="kanopi-sidebar">
+  <aside id="kanopi-sidebar" :class="position">
     <div data-html2canvas-ignore>
       <button
         :class="{ loading: loadingScreenshot }"
@@ -56,6 +56,7 @@ export default {
       imageMarkupOpen: false,
       client: window._kpi.client,
       project: window._kpi.project,
+      position: window._kpi.position,
       environment: window._kpi.environment,
       routes: window._kpi.routes,
       csrfToken: window._kpi.csrf,
