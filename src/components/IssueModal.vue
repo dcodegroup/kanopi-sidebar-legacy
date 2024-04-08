@@ -127,7 +127,6 @@
           <select v-model="ticketStatus">
             <option disabled>-- Select Ticket Status --</option>
             <option value="0">Backlog</option>
-            <option value="1">ToDo</option>
           </select>
         </div>
         <div class="field">
