@@ -13,6 +13,9 @@ mix.js('/src/index.js', '/build/')
            }
          }
        ]
-     }
+     },
+     optimization: {
+       minimize: false
+     },
    })
    .version();
