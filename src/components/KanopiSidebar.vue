@@ -82,11 +82,15 @@ export default {
       this.screenshot = payload.encodedImg;
     },
     handleClick() {
+      if (this.loadingScreenshot) {
+        return;
+      }
+
       this.loadingScreenshot = true;
       document.querySelector("body").classList.add("kanopi-screenshot");
       setTimeout(() => this.captureScreen(), 1500);
     },
-    async captureScreen() {
+    captureScreen() {
       const options = {
         useCors: true,
         proxy: "https://widget.kanopi.live/html2canvasproxy.php",
@@ -108,20 +112,18 @@ export default {
           );
         },
       };
-      try {
-        this.screenshot = await this.$html2canvas(
-          document.querySelector("body"),
-          options
-        );
-      } catch (err) {
-        // eslint-disable-next-line no-unused-expressions
-        console.error;
-        this.screenshot = "";
-        this.screenshotError =
-          "An issue occured while capturing the screenshot.";
-      }
-      this.loadingScreenshot = false;
-      this.modalOpen = true;
+
+      this.$html2canvas(document.querySelector("body"), options).then((screenshot) => {
+        console.log(screenshot);
+        this.screenshot = screenshot;
+        this.loadingScreenshot = false;
+        this.modalOpen = true;
+      }).catch((error) => {
+        console.log(error);
+        this.screenshotError = 'An issue occured while capturing the screenshot.'
+        this.loadingScreenshot = false;
+        this.modalOpen = true;
+      });
     },
     closeModal() {
       document.querySelector("body").classList.remove("kanopi-screenshot");
