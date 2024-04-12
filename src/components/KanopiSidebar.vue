@@ -37,6 +37,7 @@
 </template>
 <script>
 import kanopiLogo from "./svgs/KanopiLogo.vue";
+import html2canvas from 'html2canvas';
 import issueModal from "./IssueModal.vue";
 import vImageMarkup from "../components/VImageMarkup.vue";
 
@@ -90,7 +91,7 @@ export default {
       document.querySelector("body").classList.add("kanopi-screenshot");
       setTimeout(() => this.captureScreen(), 1500);
     },
-    async captureScreen() {
+    captureScreen() {
       const options = {
         useCors: true,
         proxy: "https://widget.kanopi.live/html2canvasproxy.php",
@@ -112,19 +113,21 @@ export default {
           );
         },
       };
-      try {
-        this.screenshot = await this.$html2canvas(
+      html2canvas(
           document.querySelector("body"),
           options
-        );
-      } catch (err) {
+      ).then((screenshot) => {
+        console.log(screenshot)
+        this.screenshot = screenshot;
+        this.loadingScreenshot = false;
+        this.modalOpen = true;
+      }).catch((err) => {
         console.log(err);
         this.screenshot = "";
-        this.screenshotError =
-          "An issue occured while capturing the screenshot.";
-      }
-      this.loadingScreenshot = false;
-      this.modalOpen = true;
+        this.screenshotError = "An issue occured while capturing the screenshot.";
+        this.loadingScreenshot = false;
+        this.modalOpen = true;
+      });
     },
     closeModal() {
       document.querySelector("body").classList.remove("kanopi-screenshot");
