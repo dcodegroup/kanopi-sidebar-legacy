@@ -117,8 +117,8 @@ export default {
           document.querySelector("body"),
           options
       ).then((screenshot) => {
-        console.log(screenshot)
-        this.screenshot = screenshot;
+        console.log(screenshot.toDataURL())
+        this.screenshot = screenshot.toDataURL();
         this.loadingScreenshot = false;
         this.modalOpen = true;
       }).catch((err) => {
