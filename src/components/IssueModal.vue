@@ -8,10 +8,10 @@
         <section class="ticket-types">
           <label v-for="(type, id) in ticketTypeOptions" :key="id">
             <input
-                :value="type.id"
-                name="ticketType"
-                type="radio"
-                @click="ticketType = type"
+              :value="type.id"
+              name="ticketType"
+              type="radio"
+              @click="ticketType = type"
             />
             <span>
               <component :is="type.icon" />
@@ -38,18 +38,18 @@
         <p v-html="ticketType.subHeading" />
 
         <div
-            v-if="!currentProject && clientProjects.length"
-            :class="{ error: selectClientProjectError }"
-            class="field"
+          v-if="!currentProject && clientProjects.length"
+          :class="{ error: selectClientProjectError }"
+          class="field"
         >
           <select
-              v-model="selectedClientProject"
-              @focus="selectClientProjectError = false"
+            v-model="selectedClientProject"
+            @focus="selectClientProjectError = false"
           >
             <option disabled value="">-- Select Project --</option>
             <template
-                v-for="clientProject in clientProjects"
-                :key="clientProject.id"
+              v-for="clientProject in clientProjects"
+              :key="clientProject.id"
             >
               <option :value="clientProject.id">
                 {{ clientProject.name }}
@@ -59,66 +59,60 @@
         </div>
       </div>
       <small v-show="selectClientProjectError" class="error"
-      >Please select a project.</small
+        >Please select a project.</small
       >
-      <div class="field">
-        <input
-            v-model="title"
-            :placeholder="ticketType.title.placeholder"
-        />
-      </div>
       <div :class="{ error: descriptionError }" class="field">
         <textarea
-            v-model="description"
-            :placeholder="ticketType.textarea.placeholder"
-            :rows="ticketType.textarea.rows"
-            @focus="descriptionError = false"
+          v-model="description"
+          :placeholder="ticketType.textarea.placeholder"
+          :rows="ticketType.textarea.rows"
+          @focus="descriptionError = false"
         />
         <vueDropzone
-            id="dz"
-            ref="dz"
-            :include-styling="false"
-            :options="dzOptions"
-            :use-custom-slot="true"
-            @vdropzone-complete="afterComplete"
-            @vdropzone-removed-file="fileRemoved"
+          id="dz"
+          ref="dz"
+          :include-styling="false"
+          :options="dzOptions"
+          :use-custom-slot="true"
+          @vdropzone-complete="afterComplete"
+          @vdropzone-removed-file="fileRemoved"
         >
           <paperclip />
           <span v-show="!attachments.length">Add attachments here...</span>
         </vueDropzone>
       </div>
       <small v-show="descriptionError" class="error"
-      >Please include a description.</small
+        >Please include a description.</small
       >
       <div
-          v-if="ticketType.secondTextarea"
-          :class="{ error: secondDescriptionError }"
-          class="field"
+        v-if="ticketType.secondTextarea"
+        :class="{ error: secondDescriptionError }"
+        class="field"
       >
         <textarea
-            v-model="secondDescription"
-            :placeholder="ticketType.secondTextarea.placeholder"
-            :rows="ticketType.secondTextarea.rows"
-            @focus="secondDescriptionError = false"
+          v-model="secondDescription"
+          :placeholder="ticketType.secondTextarea.placeholder"
+          :rows="ticketType.secondTextarea.rows"
+          @focus="secondDescriptionError = false"
         />
       </div>
       <small v-show="secondDescriptionError" class="error"
-      >Please include details.</small
+        >Please include details.</small
       >
       <div
-          v-if="ticketType.thirdTextarea"
-          :class="{ error: thirdDescriptionError }"
-          class="field"
+        v-if="ticketType.thirdTextarea"
+        :class="{ error: thirdDescriptionError }"
+        class="field"
       >
         <textarea
-            v-model="thirdDescription"
-            :placeholder="ticketType.thirdTextarea.placeholder"
-            :rows="ticketType.thirdTextarea.rows"
-            @focus="thirdDescriptionError = false"
+          v-model="thirdDescription"
+          :placeholder="ticketType.thirdTextarea.placeholder"
+          :rows="ticketType.thirdTextarea.rows"
+          @focus="thirdDescriptionError = false"
         />
       </div>
       <small v-show="thirdDescriptionError" class="error"
-      >Please include details.</small
+        >Please include details.</small
       >
       <section class="options">
         <div class="field">
@@ -258,7 +252,6 @@ export default {
   },
   data() {
     return {
-      title: null,
       description: null,
       descriptionError: false,
       secondDescription: null,
@@ -303,9 +296,6 @@ export default {
             ...type,
             icon: "featureIcon",
             subHeading: "Feature - a new feature or function",
-            title: {
-              placeholder: "Please enter ticket title",
-            },
             textarea: {
               placeholder: "Please describe the feature you require.",
               rows: 10,
@@ -316,9 +306,6 @@ export default {
             ...type,
             icon: "bugIcon",
             subHeading: "Bug - report an issue or problem with this software",
-            title: {
-              placeholder: "Please enter ticket title",
-            },
             textarea: {
               placeholder: "Please describe the issue you are experiencing.",
               rows: 4,
@@ -337,10 +324,7 @@ export default {
             ...type,
             icon: "childIcon",
             subHeading:
-                "Customer Request - ask for assistance, an export, or help",
-            title: {
-              placeholder: "Please enter ticket title",
-            },
+              "Customer Request - ask for assistance, an export, or help",
             textarea: {
               placeholder: "Please describe the request.",
               rows: 10,
@@ -351,13 +335,10 @@ export default {
             ...type,
             icon: "lightBulbIcon",
             subHeading:
-                "Opportunity - record an idea or opportunity to consider",
-            title: {
-              placeholder: "Please enter ticket title",
-            },
+              "Opportunity - record an idea or opportunity to consider",
             textarea: {
               placeholder:
-                  "Please describe the opportunity you are requesting.",
+                "Please describe the opportunity you are requesting.",
               rows: 10,
             },
           };
@@ -385,8 +366,8 @@ export default {
         file.previewElement.querySelector("img").src = this.videoIcon;
       }
       if (
-          response.file.mime_type.startsWith("application") ||
-          response.file.mime_type.startsWith("text")
+        response.file.mime_type.startsWith("application") ||
+        response.file.mime_type.startsWith("text")
       ) {
         file.previewElement.querySelector("img").src = this.documentIcon;
       }
@@ -394,28 +375,28 @@ export default {
     fileRemoved(file) {
       const response = JSON.parse(file.xhr.response);
       axios
-          .delete(response.removeFileUrl, {
-            headers: {
-              "X-CSRF-TOKEN": window._kpi.csrf,
-            },
-          })
-          .then(({ data }) => {
-            this.$delete(
-                this.attachments,
-                this.attachments.findIndex((a) => {
-                  return a.file.id === data.file.id;
-                })
-            );
-            this.$delete(
-                this.attachmentsFileIds,
-                this.attachmentsFileIds.findIndex((a) => {
-                  return a === data.file.id;
-                })
-            );
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        .delete(response.removeFileUrl, {
+          headers: {
+            "X-CSRF-TOKEN": window._kpi.csrf,
+          },
+        })
+        .then(({ data }) => {
+          this.$delete(
+            this.attachments,
+            this.attachments.findIndex((a) => {
+              return a.file.id === data.file.id;
+            })
+          );
+          this.$delete(
+            this.attachmentsFileIds,
+            this.attachmentsFileIds.findIndex((a) => {
+              return a === data.file.id;
+            })
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     submit() {
       if (!this.currentProject && !this.selectedClientProject) {
@@ -423,13 +404,13 @@ export default {
       } else if (this.description === null) {
         return (this.descriptionError = true);
       } else if (
-          this.ticketType.secondTextarea &&
-          this.secondDescription === null
+        this.ticketType.secondTextarea &&
+        this.secondDescription === null
       ) {
         return (this.secondDescriptionError = true);
       } else if (
-          this.ticketType.thirdTextarea &&
-          this.thirdDescription === null
+        this.ticketType.thirdTextarea &&
+        this.thirdDescription === null
       ) {
         return (this.thirdDescriptionError = true);
       }
@@ -437,17 +418,17 @@ export default {
       this.loading = true;
       let descriptionContent = `<b>${this.ticketType.textarea.placeholder}</b> \n ${this.description}`;
       descriptionContent += this.ticketType.secondTextarea
-          ? `\n\n <b>${this.ticketType.secondTextarea.placeholder}</b> \n ${this.secondDescription}`
-          : "";
+        ? `\n\n <b>${this.ticketType.secondTextarea.placeholder}</b> \n ${this.secondDescription}`
+        : "";
       descriptionContent += this.ticketType.thirdTextarea
-          ? `\n\n <b>${this.ticketType.thirdTextarea.placeholder}</b> \n ${this.thirdDescription}`
-          : "";
+        ? `\n\n <b>${this.ticketType.thirdTextarea.placeholder}</b> \n ${this.thirdDescription}`
+        : "";
 
       this.$refs.dz.disable();
       const data = {
-        ticketName: this.title ? this.title : this.thirdDescription
-            ? this.thirdDescription
-            : this.description,
+        ticketName: this.thirdDescription
+          ? this.thirdDescription
+          : this.description,
         description: descriptionContent,
         severity: this.severity,
         ticketType: this.ticketType.id,
@@ -484,7 +465,6 @@ export default {
     },
     resetModal() {
       this.ticketType = null;
-      this.title = null;
       this.descriptionError = false;
       this.description = null;
       this.secondDescriptionError = false;
