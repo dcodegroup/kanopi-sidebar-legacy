@@ -37,26 +37,6 @@
         </header>
         <p v-html="ticketType.subHeading" />
 
-        <div
-            v-if="!currentProject && clientProjects.length"
-            :class="{ error: selectClientProjectError }"
-            class="field"
-        >
-          <select
-              v-model="selectedClientProject"
-              @focus="selectClientProjectError = false"
-          >
-            <option disabled value="">-- Select Project --</option>
-            <template
-                v-for="clientProject in clientProjects"
-                :key="clientProject.id"
-            >
-              <option :value="clientProject.id">
-                {{ clientProject.name }}
-              </option>
-            </template>
-          </select>
-        </div>
       </div>
       <small v-show="selectClientProjectError" class="error"
       >Please select a project.</small
@@ -129,10 +109,45 @@
             </option>
           </select>
         </div>
+<!--        <div class="field">-->
+<!--          <select v-model="projects">-->
+<!--            <option disabled>&#45;&#45; Select Ticket Status &#45;&#45;</option>-->
+<!--            <option value="0">Backlog</option>-->
+<!--          </select>-->
+<!--        </div>-->
+
+<!--        <div-->
+<!--            v-if="!currentProject && clientProjects.length"-->
+<!--            :class="{ error: selectClientProjectError }"-->
+<!--            class="field"-->
+<!--        >-->
+<!--          <select-->
+<!--              v-model="selectedClientProject"-->
+<!--              @focus="selectClientProjectError = false"-->
+<!--          >-->
+<!--            <option disabled value="">&#45;&#45; Select Project &#45;&#45;</option>-->
+<!--            <template-->
+<!--                v-for="clientProject in clientProjects"-->
+<!--                :key="clientProject.id"-->
+<!--            >-->
+<!--              <option :value="clientProject.id">-->
+<!--                {{ clientProject.name }}-->
+<!--              </option>-->
+<!--            </template>-->
+<!--          </select>-->
+<!--        </div>-->
         <div class="field">
-          <select v-model="ticketStatus">
+          <select v-model="selectedClientProject">
+            <template v-for="item in clientProjects" :key="item.id">
+              <option v-if="item.id === ''" disabled value="">
+                {{ item.name }}
+              </option>
+              <option v-else :key="item.id" :value="item.id">
+                {{ item.name }}
+              </option>
+            </template>
             <option disabled>-- Select Ticket Status --</option>
-            <option value="0">Backlog</option>
+            <option value="0">Backlog test</option>
           </select>
         </div>
         <div class="field">
@@ -367,6 +382,7 @@ export default {
       }
     });
   },
+
   methods: {
     template() {
       return `<div class="dz-preview dz-file-preview">
@@ -457,7 +473,8 @@ export default {
         attachments: this.attachmentsFileIds,
         _token: window._kpi.csrf,
         client: window._kpi.client,
-        project: window._kpi.project || this.selectedClientProject,
+        // project: window._kpi.project || this.selectedClientProject,
+        project: this.selectedClientProject || window._kpi.project,
         environment: window._kpi.environment,
       };
       if (this.screenShot) {
