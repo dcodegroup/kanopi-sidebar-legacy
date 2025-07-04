@@ -147,7 +147,7 @@
               </option>
             </template>
             <option disabled>-- Select Ticket Status --</option>
-            <option value="0">Backlog test</option>
+            <option value="0">Backlog</option>
           </select>
         </div>
         <div class="field">
