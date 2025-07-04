@@ -37,26 +37,6 @@
         </header>
         <p v-html="ticketType.subHeading" />
 
-        <div
-            v-if="!currentProject && clientProjects.length"
-            :class="{ error: selectClientProjectError }"
-            class="field"
-        >
-          <select
-              v-model="selectedClientProject"
-              @focus="selectClientProjectError = false"
-          >
-            <option disabled value="">-- Select Project --</option>
-            <template
-                v-for="clientProject in clientProjects"
-                :key="clientProject.id"
-            >
-              <option :value="clientProject.id">
-                {{ clientProject.name }}
-              </option>
-            </template>
-          </select>
-        </div>
       </div>
       <small v-show="selectClientProjectError" class="error"
       >Please select a project.</small
@@ -130,18 +110,24 @@
           </select>
         </div>
         <div class="field">
-          <select v-model="ticketStatus">
-            <option disabled>-- Select Ticket Status --</option>
-            <option value="0">Backlog</option>
+          <select v-model="selectedClientProject">
+            <option disabled value="" selected>
+              -- Select Project --
+            </option>
+            <template v-for="item in clientProjects" :key="item.id">
+              <option :key="item.id" :value="item.id">
+                {{ item.name }}
+              </option>
+            </template>
           </select>
         </div>
         <div class="field">
           <select v-model="assignedUser">
+            <option disabled value="" selected>
+              -- Select Assignee --
+            </option>
             <template v-for="(user, id) in availableUsers" :key="id">
-              <option v-if="id === ''" disabled value="">
-                {{ user }}
-              </option>
-              <option v-else :key="id" :value="id">
+              <option :key="id" :value="id">
                 {{ user | ucFirst }}
               </option>
             </template>
@@ -367,6 +353,7 @@ export default {
       }
     });
   },
+
   methods: {
     template() {
       return `<div class="dz-preview dz-file-preview">
@@ -457,7 +444,8 @@ export default {
         attachments: this.attachmentsFileIds,
         _token: window._kpi.csrf,
         client: window._kpi.client,
-        project: window._kpi.project || this.selectedClientProject,
+        // project: window._kpi.project || this.selectedClientProject,
+        project: this.selectedClientProject || window._kpi.project,
         environment: window._kpi.environment,
       };
       if (this.screenShot) {
