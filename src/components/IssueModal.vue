@@ -109,54 +109,25 @@
             </option>
           </select>
         </div>
-<!--        <div class="field">-->
-<!--          <select v-model="projects">-->
-<!--            <option disabled>&#45;&#45; Select Ticket Status &#45;&#45;</option>-->
-<!--            <option value="0">Backlog</option>-->
-<!--          </select>-->
-<!--        </div>-->
-
-<!--        <div-->
-<!--            v-if="!currentProject && clientProjects.length"-->
-<!--            :class="{ error: selectClientProjectError }"-->
-<!--            class="field"-->
-<!--        >-->
-<!--          <select-->
-<!--              v-model="selectedClientProject"-->
-<!--              @focus="selectClientProjectError = false"-->
-<!--          >-->
-<!--            <option disabled value="">&#45;&#45; Select Project &#45;&#45;</option>-->
-<!--            <template-->
-<!--                v-for="clientProject in clientProjects"-->
-<!--                :key="clientProject.id"-->
-<!--            >-->
-<!--              <option :value="clientProject.id">-->
-<!--                {{ clientProject.name }}-->
-<!--              </option>-->
-<!--            </template>-->
-<!--          </select>-->
-<!--        </div>-->
         <div class="field">
           <select v-model="selectedClientProject">
+            <option disabled value="" selected>
+              -- Select Project --
+            </option>
             <template v-for="item in clientProjects" :key="item.id">
-              <option v-if="item.id === ''" disabled value="">
-                {{ item.name }}
-              </option>
-              <option v-else :key="item.id" :value="item.id">
+              <option :key="item.id" :value="item.id">
                 {{ item.name }}
               </option>
             </template>
-            <option disabled>-- Select Ticket Status --</option>
-            <option value="0">Backlog</option>
           </select>
         </div>
         <div class="field">
           <select v-model="assignedUser">
+            <option disabled value="" selected>
+              -- Select Assignee --
+            </option>
             <template v-for="(user, id) in availableUsers" :key="id">
-              <option v-if="id === ''" disabled value="">
-                {{ user }}
-              </option>
-              <option v-else :key="id" :value="id">
+              <option :key="id" :value="id">
                 {{ user | ucFirst }}
               </option>
             </template>
